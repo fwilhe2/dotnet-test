@@ -4,13 +4,11 @@ on: [push]
 
 jobs:
   build:
-
     name: Test on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macOS-latest]
-
     steps:
     - uses: actions/checkout@v1
     - name: Setup .NET Core
@@ -18,4 +16,7 @@ jobs:
       with:
         dotnet-version: 2.2.108
     - name: Build with dotnet
-      run: dotnet build --configuration Release
+      run: |
+        dotnet build --configuration Release
+        env
+      shell: pwsh
